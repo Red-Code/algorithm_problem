@@ -29,9 +29,9 @@ public class Main {
 
         int num=0;
 
-        String two_z = Integer.toBinaryString(z);
-        for (int i=0;i<two_z.length();i++){
-            if (two_z.charAt(i)=='1'){
+        String binary_z = Integer.toBinaryString(z);
+        for (int i=0;i<binary_z.length();i++){
+            if (binary_z.charAt(i)=='1'){
                 num++;
             }
         }

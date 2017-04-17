@@ -10,36 +10,95 @@ import java.util.Scanner;
  *
  */
 /**
+ * You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.
+Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap. True for win and false for lose.
+For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
+ */
+/**
  * 测试类
+ * 
+ * 你和你的朋友玩下面的尼姆游戏：桌子上有一堆石头，每次你们轮流移除1到3个石头。除去最后一块石头的人将是胜利者。你将采取第一次删除石头。
+你们两个都很聪明，对游戏有最佳的策略。写一个函数，判断你是否能赢得游戏中给定的堆数。真为赢而假输。
+例如，如果有4个石头堆，那么你永远不会赢得比赛：无论1，2，或你删除石头，最后的石头将永远被删除你的朋友。
  */
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
-		String line1 = scanner.nextLine();
-		String line2 = scanner.nextLine();
-
-		//连续输入n个数
-//		int n = Integer.parseInt(scanner.nextLine());
-//		
-//		String[] arr = new String[n];
-//		for(int i=0;i<n;i++){
-//			arr[i] = scanner.nextLine();
-//		}
+		int sum = scanner.nextInt();
 		
-		int i = fun1(line1,line2);
-		String s = fun2(line1,line2);
-		
-		String string = null;
-		System.out.println(string);
+		//一开始我拿的三种状况
+		if (chance(sum,1,1)) {
+			System.out.println(true);
+		}else if (chance(sum,2,1)) {
+			System.out.println(true);
+		}else if (chance(sum,3,1)) {
+			System.out.println(true);
+		}else {
+			System.out.println(false);
+		}
 	}
 	
-	private static int fun1(String line1,String line2) {
-		return 0;
-	}
-	
-	private static String fun2(String line1,String line2) {
-		return null;
+	/**
+	 * 
+	 * @param surplus 剩余的石头数量
+	 * @param take_num 这一次拿走的数量
+	 * @param people 1代表是我，2代表是朋友
+	 * @return 返回true，则表示我能赢
+	 */
+	private static boolean chance(int surplus,int take_num,int people) {
+		surplus = surplus-take_num;
+		
+		//当某人拿完，剩余四块时，该人赢
+		if (surplus==4) {
+			if (people==1) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		
+		//当某人拿完，剩余数小于4块时，另一个人赢
+		if (surplus<=3) {
+			if (people==1) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+		
+		//此时剩余的石头大于4，继续拿
+		
+		if (people==1) {//交换人
+			people = 2;
+			//如果是朋友拿，则必须三个true
+			if (chance(surplus,1,people)) {
+				if (chance(surplus,2,people)) {
+					if (chance(surplus,3,people)) {
+						return true;
+					}else {
+						return false;
+					}
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		}else {
+			people = 1;
+			
+			//如果是我拿，则只需有一个true即可
+			if (chance(surplus,1,people)) {
+				return true;
+			}else if (chance(surplus,2,people)) {
+				return true;
+			}else if (chance(surplus,3,people)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
 	}
 }

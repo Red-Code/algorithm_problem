@@ -64,7 +64,7 @@ public class Main {
 			if ((i+1)<max) {
 				now_moves = upper(i+2, max, now_moves);
 			}
-			System.out.println("start"+start);
+
 			now_moves++;
 		}
 		return now_moves;

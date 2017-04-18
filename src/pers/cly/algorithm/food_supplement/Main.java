@@ -74,6 +74,6 @@ public class Main {
 			result++;
 		}
 		
-		System.out.println(result-1);//因为走到终点还会补充一次
+		System.out.println(result-1);//因为走到终点还会补充一次,所以减一
 	}
 }

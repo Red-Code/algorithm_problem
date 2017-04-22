@@ -33,9 +33,6 @@ BC23
 R23C55
  */
 public class Main {
-//2
-	//R23C55
-	//BC23
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		int t = scanner.nextInt();
